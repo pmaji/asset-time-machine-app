@@ -1,5 +1,5 @@
 # asset-time-machine-app
-Python Dash app that lends insight into financial asset performance over time. 
+Early work in progress. Check back frequently for updates and new additions. 
 
 # set-up notes (will clean the README up later)
 - all contributors use their own branch (e.g. paul_dev) and submit PRs to master for review and merge to master
@@ -37,15 +37,25 @@ Python Dash app that lends insight into financial asset performance over time.
 - use a jupyter notebook to test basic data workflow before porting it into the Dash app structure; the .ipynb should contain:
     - data pull
     - any data cleaning / transformation
-    - function that takes as its input a stock ticker and a datetime, calculates % down from all-time-high (henceforth ATH), and also finds most recent time in history close to that % down from ATH
+    - function that takes as its input a stock ticker and a datetime, and calculates % down from all-time-high (henceforth ATH), and also finds most recent time in history close to that % down from ATH
     - function that produces some time series plot (maybe of closing price?) that clearly shows the % we are down from ATH, and links that back to the most recent time in history where we were close to that same % down from ATH
 - begin coding the dash app
-    - most basic version should have 2 call-back selectors--one for the asset, and one for the selected datetime of interest (but the user should also be able to select the latter by clicking on the aforementioned chart)
-
+    - most basic version should have 1 call-back selector--the selector for the asset of interest (i.e. VTI or GOOGL)
 # later steps to come
 - pick dashboard format and maybe copy some css / js from the plotly dash library of examplars 
 - write better narrative README and docs 
 - thing about integrating cryptos as well
+- build all elements of main GUI; right now I'm thinking:
+    - asset-selector at the top
+    - 1st main chart is closing price over time 
+    - 2nd main chart underneath is % down from ATH over time
+    - 3rd main component is a table that updates with whatever date is selected, and includes things like:
+        - each row is an instance of a past time in history when this asset was the same % down from ATH
+        - columns for what % gain / loss was realized starting at that historical point, looking forward 10. 30. 60 days etc.
+        - column for number of days until the next all-time-high 
+    - some similar vizs / apps for inspiration:
+        - [example Dash app for financial asset tracking](https://github.com/plotly/dash-stock-tickers-demo-app)
+
 
 # developers on this project:
 - [Paul Jeffries](https://twitter.com/ByPaulJ)
