@@ -17,6 +17,7 @@ Early work in progress. Check back frequently for updates and new additions.
         - after the merge completes, when you go back to your branch on github's gui you should see "This branch is even with master." right underneath your branch name
         - congrats! you now have working branched version control and are ready to get developping! 
 - use of virtual environment is recommended, i.e.:
+    - high level virtual environment instructions [can be found here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
     - `python3 -m venv env`
         - run this in your project working directory to create the virutal environment and name it "env" (standard convention)
     - `source env/bin/activate`
