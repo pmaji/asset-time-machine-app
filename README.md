@@ -13,7 +13,7 @@ Python Dash app that lends insight into financial asset performance over time.
         - `git push`
         - go back to your branch on github via the GUI and submit a pull request
         - once it is approved and merged, go back to your terminal and run `git pull`
-        - once that is complete, run `git merge origin/master` to ensure you are up to date with master locally
+        - once that is complete--you should see "Fast-forward" in your terminal once it's done--run `git merge origin/master` to ensure you are up to date with master locally
         - after the merge completes, when you go back to your branch on github's gui you should see "This branch is even with master." right underneath your branch name
         - congrats! you now have working branched version control and are ready to get developping! 
 - use of virtual environment is recommended, i.e.:
