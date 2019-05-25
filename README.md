@@ -3,6 +3,17 @@ Python Dash app that lends insight into financial asset performance over time.
 
 # set-up notes (will clean the README up later)
 - all contributors use their own branch (e.g. paul_dev) and submit PRs to master for review and merge to master
+    - create a branch and named it *your_firstname_here*_dev
+    - clone that branch locally
+    - to test that it worked:
+        - make a small test change to a file like the README
+        - save
+        - `git add --all`
+        - `git commit -m "use some simple imperative commit message here"`
+        - `git push`
+        - go back to your branch on github via the GUI and submit a pull request
+        - once it is approved and merged, go back to your terminal and run `git pull`
+        - after the pull completes, when you go back to your branch on github's gui you should see "This branch is even with master." right underneath your branch name
 - use of virtual environment is recommended, i.e.:
     - `python3 -m venv env`
         - run this in your project working directory to create the virutal environment and name it "env" (standard convention)
