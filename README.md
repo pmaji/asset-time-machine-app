@@ -59,4 +59,4 @@ Early work in progress. Check back frequently for updates and new additions.
 
 # developers on this project:
 - [Paul Jeffries](https://twitter.com/ByPaulJ)
-- Zach Hall
+- [Zach Hall] (https://cdn.shopify.com/s/files/1/1195/1382/products/thug-life-bear-sticker-riot-society-clothing_2000x.jpg?v=1548319485)
