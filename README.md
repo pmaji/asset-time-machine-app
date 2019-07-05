@@ -2,7 +2,7 @@
 Early work in progress. Check back frequently for updates and new additions. 
 
 Here is a teaser of the kinds of charts we're looking to produce:
-![Basic Asset Viz.](https://raw.githubusercontent.com/pmaji/asset-time-machine-app/master/media/test_aapl_chart_screenshot.jpg)
+![Basic Asset Viz.](https://raw.githubusercontent.com/pmaji/asset-time-machine-app/master/media/test_vti_chart_screenshot.jpg)
 
 # set-up notes (will clean the README up later)
 - all contributors use their own branch (e.g. paul_dev) and submit PRs to master for review and merge to master
