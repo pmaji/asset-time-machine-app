@@ -33,7 +33,13 @@ Here is a teaser of the kinds of charts we're looking to produce:
         - run this once you have activated the virtual environment to install all necessary package versions
     - `pip freeze > requirements.txt`
         - if you need a new package beyond what is already in the extant requirements.txt file, pip install the package and then use this command to update the reqs
-
+        
+- to get started working on this project using jupyter lab:
+    - ensure you have your virtual env set up as described above
+    - ensure that you install all the requisite packages using the aformentioned 'pip install -r requirements.txt'
+    - start your jupyter lab session with 'env/bin/jupyter-lab'
+    - ensure that the name of the kernel that starts in your terminal matches the kernel listed in the top right of your jupyter lab session
+    
 # preliminary steps
 - pick a data source for OHLC stock market data
     - important caveat: I want it to also include index funds, if possible (i.e. VTI, VTV, etc.)
@@ -45,10 +51,11 @@ Here is a teaser of the kinds of charts we're looking to produce:
     - function that produces some time series plot (maybe of closing price?) that clearly shows the % we are down from ATH, and links that back to the most recent time in history where we were close to that same % down from ATH
 - begin coding the dash app
     - most basic version should have 1 call-back selector--the selector for the asset of interest (i.e. VTI or GOOGL)
+    
 # later steps to come
 - pick dashboard format and maybe copy some css / js from the plotly dash library of examplars 
 - write better narrative README and docs 
-- thing about integrating cryptos as well
+- think about integrating cryptos as well
 - build all elements of main GUI; right now I'm thinking:
     - asset-selector at the top
     - 1st main chart is closing price over time 
@@ -59,7 +66,6 @@ Here is a teaser of the kinds of charts we're looking to produce:
         - column for number of days until the next all-time-high 
     - some similar vizs / apps for inspiration:
         - [example Dash app for financial asset tracking](https://github.com/plotly/dash-stock-tickers-demo-app)
-
 
 # developers on this project:
 - [Paul Jeffries](https://twitter.com/ByPaulJ)
