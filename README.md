@@ -27,6 +27,8 @@ Here is a teaser of the kinds of charts we're looking to produce:
         - run this to activate the virtual environment
     - `deactivate`
         - run this to deactivate the virtual environment 
+- spin up a jupyter lab instance with `env/bin/jupyter-lab`
+- run the app with `env/bin/python3 app.py`
 
 - all packages should be documented in the requirements.txt file, so that all users are running the same package versions, i.e.:
     - `pip install -r requirements.txt`
