@@ -1,33 +1,40 @@
+# key packages:
+
+# standard packages
+import numpy as np
+import pandas as pd
+import datetime
+
+# dash packages
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
-import numpy as np
-import pandas as pd
-import datetime
-
-# for data cleaning
-from janitor import clean_names, remove_empty
-
-import yfinance as yf
-
+# plotly packages for visualizations
 import plotly.graph_objs as go
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-#init_notebook_mode(connected=False)
+
+# janitor for data cleaning
+from janitor import clean_names, remove_empty
+
+# yahoo finance for stock info
+import yfinance as yf
 
 plotly_figure = dict()
 
-present_asset_name = 'FNMA'
+# instantiating the default asset to be displayed upon start-up
+present_asset_name = 'VTI'
 
+# sourcing some css to style the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    dcc.Input(id='security-input', type='text', value='FNMA'),
-    html.Button(id='submit-button', n_clicks=0, children='Submit'),
-    html.Div([dcc.Graph(id="asset-graph",figure=plotly_figure)],id="graph-div",style={"opacity":"0"})
+    dcc.Input(id = 'security-input', type = 'text', value = present_asset_name),
+    html.Button(id = 'submit-button', n_clicks = 0, children = 'Submit'),
+    html.Div([dcc.Graph(id = "asset-graph",figure = plotly_figure)],id = "graph-div", style = {"opacity":"0"})
 	#shouldn't be setting opacity to 0, div should be gone, but plotly messes up horizontal sizing with that
 ])
 
@@ -51,22 +58,22 @@ def update_output(n_clicks, security):
 	try:
 		initial_data_pull_df = (
 			yf.download(
-				tickers=security,
-				start=start_date,
-				end=formatted_date_today,
-				progress=False
+				tickers = security,
+				start = start_date,
+				end = formatted_date_today,
+				progress = False
 			)
 		# using janitor to clean the column names
 		.pipe(clean_names)
 		)
 	except:
-		security = "FNMA"
+		security = present_asset_name
 		initial_data_pull_df = (
 			yf.download(
-				tickers="FNMA",
-				start=start_date,
-				end=formatted_date_today,
-				progress=False
+				tickers = present_asset_name,
+				start = start_date,
+				end = formatted_date_today,
+				progress = False
 			)
 		# using janitor to clean the column names
 		.pipe(clean_names)
@@ -74,8 +81,8 @@ def update_output(n_clicks, security):
 	
 
 	# renaming the index as well to make it lowercase (sadly janitor doesn't yet catch the index name)
-	initial_data_pull_df.index.rename('date', inplace=True)
-	initial_data_pull_df.reset_index(level=0, inplace=True)
+	initial_data_pull_df.index.rename('date', inplace = True)
+	initial_data_pull_df.reset_index(level = 0, inplace = True)
 	cleaned_close_df = initial_data_pull_df.loc[:,('date','adj_close')]
 	cleaned_close_df['recent_ath_val'] = cleaned_close_df['adj_close'].cummax()
 	recent_ath_date_df = (cleaned_close_df
@@ -84,7 +91,7 @@ def update_output(n_clicks, security):
                       .reset_index()
                       .rename(columns={"date":"recent_ath_date"})
                      )
-	close_and_ath_df = cleaned_close_df.merge(recent_ath_date_df,on="recent_ath_val")
+	close_and_ath_df = cleaned_close_df.merge(recent_ath_date_df, on = "recent_ath_val")
 	close_and_ath_df['perc_down_from_ath'] = (
 		100 * (1 - (close_and_ath_df['adj_close'] / close_and_ath_df['recent_ath_val']))
 	)
