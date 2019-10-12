@@ -1,74 +1,52 @@
-# asset-time-machine-app
+# Asset Time Machine App
+
+## Overview
+
+*All views expressed on this site are my own and do not represent the opinions of any entity with which I have been, am now, or will be affiliated.*
+
 Early work in progress. Check back frequently for updates and new additions. 
 
-Here is a teaser of the kinds of charts we're looking to produce:
+Here is a teaser of the kinds of charts the app allows you to explore:
 ![Basic Asset Viz.](https://raw.githubusercontent.com/pmaji/asset-time-machine-app/master/media/test_vti_chart_screenshot_july62019.jpg)
 
-# set-up notes (will clean the README up later)
-- all contributors use their own branch (e.g. paul_dev) and submit PRs to master for review and merge to master
-    - create a branch and named it *your_firstname_here*_dev
-    - clone that branch locally
-    - to test that it worked:
-        - make a small test change to a file like the README
-        - save
-        - `git add --all`
-        - `git commit -m "use some simple imperative commit message here"`
-        - `git push`
-        - go back to your branch on github via the GUI and submit a pull request
-        - once it is approved and merged, go back to your terminal and run `git pull`
-        - once that is complete--you should see "Fast-forward" in your terminal once it's done--run `git merge origin/master` to ensure you are up to date with master locally
-        - after the merge completes, when you go back to your branch on github's gui you should see "This branch is even with master." right underneath your branch name
-        - congrats! you now have working branched version control and are ready to get developping! 
-- use of virtual environment is recommended, i.e.:
-    - high level virtual environment instructions [can be found here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
-    - `python3 -m venv env`
-        - run this in your project working directory to create the virutal environment and name it "env" (standard convention)
-    - `source env/bin/activate`
-        - run this to activate the virtual environment
-    - `deactivate`
-        - run this to deactivate the virtual environment 
-- spin up a jupyter lab instance with `env/bin/jupyter-lab`
-- run the app with `env/bin/python3 app.py`
+If you have questions, comments, or suggested alterations to these materials, please [open an issue here](https://github.com/pmaji/asset-time-machine-app/issues) on GitHub. Also, don't hesitate to reach out [via Twitter here](https://twitter.com/ByPaulJ).
 
-- all packages should be documented in the requirements.txt file, so that all users are running the same package versions, i.e.:
-    - `pip install -r requirements.txt`
-        - run this once you have activated the virtual environment to install all necessary package versions
-    - `pip freeze > requirements.txt`
-        - if you need a new package beyond what is already in the extant requirements.txt file, pip install the package and then use this command to update the reqs
-        
-- to get started working on this project using jupyter lab:
-    - ensure you have your virtual env set up as described above
-    - ensure that you install all the requisite packages using the aformentioned 'pip install -r requirements.txt'
-    - start your jupyter lab session with 'env/bin/jupyter-lab'
-    - ensure that the name of the kernel that starts in your terminal matches the kernel listed in the top right of your jupyter lab session
-    
-# preliminary steps
-- pick a data source for OHLC stock market data
-    - important caveat: I want it to also include index funds, if possible (i.e. VTI, VTV, etc.)
-    - figure out how close to live we can get it (maybe via some sort of a streaming API call?)
-- use a jupyter notebook to test basic data workflow before porting it into the Dash app structure; the .ipynb should contain:
-    - data pull
-    - any data cleaning / transformation
-    - function that takes as its input a stock ticker and a datetime, and calculates % down from all-time-high (henceforth ATH), and also finds most recent time in history close to that % down from ATH
-    - function that produces some time series plot (maybe of closing price?) that clearly shows the % we are down from ATH, and links that back to the most recent time in history where we were close to that same % down from ATH
-- begin coding the dash app
-    - most basic version should have 1 call-back selector--the selector for the asset of interest (i.e. VTI or GOOGL)
-    
-# later steps to come
-- pick dashboard format and maybe copy some css / js from the plotly dash library of examplars 
-- write better narrative README and docs 
-- think about integrating cryptos as well
-- build all elements of main GUI; right now I'm thinking:
-    - asset-selector at the top
-    - 1st main chart is closing price over time 
-    - 2nd main chart underneath is % down from ATH over time
-    - 3rd main component is a table that updates with whatever date is selected, and includes things like:
-        - each row is an instance of a past time in history when this asset was the same % down from ATH
-        - columns for what % gain / loss was realized starting at that historical point, looking forward 10. 30. 60 days etc.
-        - column for number of days until the next all-time-high 
-    - some similar vizs / apps for inspiration:
-        - [example Dash app for financial asset tracking](https://github.com/plotly/dash-stock-tickers-demo-app)
+## Setup
 
-# developers on this project:
+All environment management for this project is accomplished via [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). Once you have cloned the repository locally, there are a few simple steps to get up and running; just run the code snippets below in terminal.
+
+- environment setup:
+    - `conda env create -f environment.yml`
+        - this code builds the conda virtual environment (named "atm_env") with all necessary dependencies 
+    - `conda activate atm_env`
+        - this code activates the environment so that you can start running code or the app itself
+- running the EDA code & app:
+    - `jupyter lab`
+        - this code will spin up a Jupyter Lab instance for interactive editing, with all settings and packages loaded
+    - `python app.py`
+        - this code will launch the app locally
+
+## Contribution Rules
+    
+If interested in contributing to this project, check out the [open issues](https://github.com/pmaji/asset-time-machine-app/issues) to see what we have on deck for development where you might be able to pitch in. If you have other suggestions for development or ways you'd like to contribute, please open an issue to get that conversation started. 
+
+Presently there are two main devs working on the project:
 - [Paul Jeffries](https://twitter.com/ByPaulJ)
 - [Zach Hall](https://cdn.shopify.com/s/files/1/1195/1382/products/thug-life-bear-sticker-riot-society-clothing_2000x.jpg?v=1548319485)
+
+All contributors should use their own branch (e.g. paul_dev) unless the planned contribution is small (i.e. limited to a one-off PR). Development work should be done in the dev branches, with PRs then being submitted to master for review and subsequent merging. For anyone seeking to contribute who is not familiar with GitHub, feel free to look over the basic instructions below to get started. 
+
+- create a branch and name it <yournamehere_dev>
+- clone that branch locally
+- to test that you're all set up:
+    - make a small test change to a file like the README.md
+    - save your changes and run the following code in your terminal
+    - `git add --all`
+    - `git commit -m "use some simple imperative commit message here"`
+    - `git push`
+    - go back to your branch on github via the GUI and submit a pull request
+    - once it is approved and merged, go back to your terminal and run `git pull`
+    - once that is complete--you should see "Fast-forward" in your terminal once it's done
+    - run `git merge origin/master` to ensure you are up to date with master locally
+    - if the merge completes as planned, you should see "This branch is even with master." under your branch name on GitHub's GUI
+    - congrats! you now have working branched version control and are ready to get developping!
