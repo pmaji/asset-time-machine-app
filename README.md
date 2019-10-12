@@ -20,9 +20,9 @@ All environment management for this project is accomplished via [Anaconda](https
         - this code builds the conda virtual environment (named "atm_env") with all necessary dependencies 
     - `conda activate atm_env`
         - this code activates the environment so that you can start running code or the app itself
-- running the EDA code & app:
+- running the code & app:
     - `jupyter lab`
-        - this code will spin up a Jupyter Lab instance for interactive editing, with all settings and packages loaded
+        - this code will spin up a [Jupyter Lab](https://jupyterlab.readthedocs.io/en/stable/) instance for interactive editing, with all settings and packages loaded
     - `python app.py`
         - this code will launch the app locally
 
@@ -30,7 +30,7 @@ All environment management for this project is accomplished via [Anaconda](https
     
 If interested in contributing to this project, check out the [open issues](https://github.com/pmaji/asset-time-machine-app/issues) to see what we have on deck for development where you might be able to pitch in. If you have other suggestions for development or ways you'd like to contribute, please open an issue to get that conversation started. 
 
-Presently there are two main devs working on the project:
+Presently there are two main developers working on the project:
 - [Paul Jeffries](https://twitter.com/ByPaulJ)
 - [Zach Hall](https://cdn.shopify.com/s/files/1/1195/1382/products/thug-life-bear-sticker-riot-society-clothing_2000x.jpg?v=1548319485)
 
@@ -38,15 +38,15 @@ All contributors should use their own branch (e.g. paul_dev) unless the planned 
 
 - create a branch and name it <yournamehere_dev>
 - clone that branch locally
-- to test that you're all set up:
+- to confirm that you're all set up:
     - make a small test change to a file like the README.md
     - save your changes and run the following code in your terminal
     - `git add --all`
     - `git commit -m "use some simple imperative commit message here"`
     - `git push`
-    - go back to your branch on github via the GUI and submit a pull request
+    - go back to your branch on GitHub via the GUI and submit a pull request
     - once it is approved and merged, go back to your terminal and run `git pull`
     - once that is complete--you should see "Fast-forward" in your terminal once it's done
     - run `git merge origin/master` to ensure you are up to date with master locally
-    - if the merge completes as planned, you should see "This branch is even with master." under your branch name on GitHub's GUI
-    - congrats! you now have working branched version control and are ready to get developping!
+    - if the merge works, you should see "This branch is even with master." under your branch name on GitHub's GUI
+    - congrats; you now have working branched version control and are ready to get developping!
