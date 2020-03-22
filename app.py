@@ -4,6 +4,7 @@
 import numpy as np
 import pandas as pd
 import datetime
+from dateutil import parser
 
 # dash packages
 import dash
@@ -33,19 +34,18 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     dcc.Input(id='asset-input', type='text', value=present_asset_name),
+    html.Br(),
     dcc.DatePickerSingle(
         id='ts-start-date-picker-range',
-        calendar_orientation='vertical',
-        min_date_allowed=datetime.datetime(1900, 1, 1),
-        max_date_allowed=datetime.datetime.today(),
-        date=datetime.datetime(2000, 1, 1)
+        # this is the date we will start our calculations from
+        date='2000-01-01'
     ),
+    html.Br(),
     html.Button(id='submit-button', n_clicks=0, children='Submit'),
     html.Div([dcc.Graph(id="asset-graph", figure=plotly_figure)],
              id="graph-div", style={"opacity": "0"})
     # shouldn't be setting opacity to 0, div should be gone, but plotly messes up horizontal sizing with that
 ])
-
 
 @app.callback(Output('graph-div', 'style'), [Input('submit-button', 'n_clicks')])
 def display_div(n_clicks):
@@ -53,18 +53,18 @@ def display_div(n_clicks):
         return {"opacity": "1"}
     return {"opacity": "0"}
 
-
 @app.callback(Output('asset-graph', 'figure'),
               [Input('submit-button', 'n_clicks')],
-              [State('asset-input', 'value')])
-def update_output(n_clicks, asset):
+              [State('asset-input', 'value'),
+               State('ts-start-date-picker-range', 'date')])
+def update_output(n_clicks, asset, date):
     present_asset_name = asset
     date_today = datetime.datetime.today()
     # formatting today's date appropriately for yf.download() call
     formatted_date_today = date_today.strftime('%Y-%m-%d')
     # setting start date of period for which to pull data
     # need to think about how far back we want to go; code is fast but plotly is a bit slow
-    start_date = '2000-01-01'
+    start_date = date
     try:
         initial_data_pull_df = (
             yf.download(
