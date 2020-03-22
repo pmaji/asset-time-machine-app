@@ -47,20 +47,22 @@ app.layout = html.Div([
             html.P("Pick the asset you'd like to explore:"),
             dcc.Input(id='asset-input', type='text', value=present_asset_name)
         ], 
-        style=dict(display='flex', justifyContent='left')
+        style=dict(justifyContent='left')
     ),
     # this Div will hold the label and start date picker component:
     html.Div(
         children=[
-            html.P("Pick how far back you'd like to explore"),
+            html.P("Pick how far back you'd like to explore:"),
+            html.P(" "),
             dcc.DatePickerSingle(
                 id='ts-start-date-picker-range',
                 # this is the date from which we will start our calculations
                 date='2000-01-01'
                 )
         ], 
-        style=dict(display='flex', justifyContent='left')
+        style=dict(justifyContent='left')
     ),
+    html.Br(),
     html.Button(id='submit-button', n_clicks=0, children='Submit'),
     html.Div([dcc.Graph(id="asset-graph", figure=plotly_figure)],
             # shouldn't be setting opacity to 0, div should be gone, but plotly messes up horizontal sizing with that
