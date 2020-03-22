@@ -33,18 +33,43 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    dcc.Input(id='asset-input', type='text', value=present_asset_name),
-    html.Br(),
-    dcc.DatePickerSingle(
-        id='ts-start-date-picker-range',
-        # this is the date we will start our calculations from
-        date='2000-01-01'
+    dcc.Markdown('''
+        ## Asset Time Machine
+
+        Welcome to the Asset Time Machine App! 
+
+        Check out the [documentation here](https://github.com/pmaji/asset-time-machine-app), then select your inputs and click "SUBMIT" to get started.
+        '''
+        ), 
+    # this Div will hold the label and asset-input component:
+    html.Div(
+        children=[
+            html.P("Pick the asset you'd like to explore:"),
+            dcc.Input(id='asset-input', type='text', value=present_asset_name)
+        ], 
+        style=dict(display='flex', justifyContent='left')
     ),
-    html.Br(),
+    # this Div will hold the label and start date picker component:
+    html.Div(
+        children=[
+            html.P("Pick how far back you'd like to explore"),
+            dcc.DatePickerSingle(
+                id='ts-start-date-picker-range',
+                # this is the date from which we will start our calculations
+                date='2000-01-01'
+                )
+        ], 
+        style=dict(display='flex', justifyContent='left')
+    ),
     html.Button(id='submit-button', n_clicks=0, children='Submit'),
     html.Div([dcc.Graph(id="asset-graph", figure=plotly_figure)],
-             id="graph-div", style={"opacity": "0"})
-    # shouldn't be setting opacity to 0, div should be gone, but plotly messes up horizontal sizing with that
+            # shouldn't be setting opacity to 0, div should be gone, but plotly messes up horizontal sizing with that
+             id="graph-div", style={"opacity": "0"}),
+    dcc.Markdown('''
+        #### Notes:
+        If you have any questions or comments, don't hesitate to [reach out via Twitter](https://twitter.com/ByPaulJ).
+        '''
+        )
 ])
 
 @app.callback(Output('graph-div', 'style'), [Input('submit-button', 'n_clicks')])
