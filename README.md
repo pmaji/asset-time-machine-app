@@ -9,7 +9,7 @@ Early work in progress. Check back frequently for updates and new additions.
 Here is a teaser of the kinds of charts the app allows you to explore:
 ![Basic Asset Viz.](https://raw.githubusercontent.com/pmaji/asset-time-machine-app/master/media/test_vti_chart_screenshot_july62019.jpg)
 
-If you have questions, comments, or suggested alterations to these materials, please [open an issue here](https://github.com/pmaji/asset-time-machine-app/issues) on GitHub. Also, don't hesitate to reach out [via Twitter here](https://twitter.com/ByPaulJ).
+If you have questions, comments, or suggested alterations to these materials, please [open an issue here](https://github.com/pmaji/asset-time-machine-app/issues) on GitHub. 
 
 ## Setup
 
@@ -31,8 +31,8 @@ All environment management for this project is accomplished via [Anaconda](https
 If interested in contributing to this project, check out the [open issues](https://github.com/pmaji/asset-time-machine-app/issues) to see what we have on deck for development where you might be able to pitch in. If you have other suggestions for development or ways you'd like to contribute, please open an issue to get that conversation started. 
 
 Presently there are two main developers working on the project:
-- [Paul Jeffries](https://twitter.com/ByPaulJ)
-- [Zach Hall](https://cdn.shopify.com/s/files/1/1195/1382/products/thug-life-bear-sticker-riot-society-clothing_2000x.jpg?v=1548319485)
+- Paul Jeffries
+- Zach Hall
 
 All contributors should use their own branch (e.g. paul_dev) unless the planned contribution is small (i.e. limited to a one-off PR). Development work should be done in the dev branches, with PRs then being submitted to master for review and subsequent merging. For anyone seeking to contribute who is not familiar with GitHub, feel free to look over the basic instructions below to get started. 
 
