@@ -1,23 +1,19 @@
 # key packages:
 
 # standard packages
-import numpy as np
 import pandas as pd
 import datetime
-from dateutil import parser
 
 # dash packages
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 from dash.dependencies import Input, Output, State
 
 # plotly packages for visualizations
 import plotly.graph_objs as go
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 # janitor for data cleaning
-from janitor import clean_names, remove_empty
+from janitor import clean_names
 
 # yahoo finance for stock info
 import yfinance as yf
@@ -69,7 +65,7 @@ app.layout = html.Div([
              id="graph-div", style={"opacity": "0"}),
     dcc.Markdown('''
         #### Notes:
-        If you have any questions or comments, don't hesitate to [reach out via Twitter](https://twitter.com/ByPaulJ).
+        If you have any questions or comments, check out the [GitHub repository](https://github.com/pmaji/asset-time-machine-app).
         '''
         )
 ])
@@ -93,33 +89,33 @@ def update_output(n_clicks, asset, date):
     # need to think about how far back we want to go; code is fast but plotly is a bit slow
     start_date = date
     try:
-        initial_data_pull_df = (
-            yf.download(
+        raw_df = yf.download(
                 tickers=asset,
                 start=start_date,
                 end=formatted_date_today,
-                progress=False
+                progress=False,
+                auto_adjust=False
             )
-            # using janitor to clean the column names
-            .pipe(clean_names)
-        )
-    except:
+        if isinstance(raw_df.columns, pd.MultiIndex):
+            raw_df.columns = raw_df.columns.get_level_values(0)
+        initial_data_pull_df = raw_df.pipe(clean_names)
+    except Exception:
         asset = present_asset_name
-        initial_data_pull_df = (
-            yf.download(
+        raw_df = yf.download(
                 tickers=present_asset_name,
                 start=start_date,
                 end=formatted_date_today,
-                progress=False
+                progress=False,
+                auto_adjust=False
             )
-            # using janitor to clean the column names
-            .pipe(clean_names)
-        )
+        if isinstance(raw_df.columns, pd.MultiIndex):
+            raw_df.columns = raw_df.columns.get_level_values(0)
+        initial_data_pull_df = raw_df.pipe(clean_names)
 
     # renaming the index as well to make it lowercase (sadly janitor doesn't yet catch the index name)
     initial_data_pull_df.index.rename('date', inplace=True)
     initial_data_pull_df.reset_index(level=0, inplace=True)
-    cleaned_close_df = initial_data_pull_df.loc[:, ('date', 'adj_close')]
+    cleaned_close_df = initial_data_pull_df.loc[:, ['date', 'adj_close']]
     cleaned_close_df['recent_ath_val'] = cleaned_close_df['adj_close'].cummax()
     recent_ath_date_df = (cleaned_close_df
                           .groupby("recent_ath_val")['date']
@@ -246,4 +242,4 @@ def update_output(n_clicks, asset, date):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
